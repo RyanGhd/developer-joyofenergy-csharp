@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 namespace JOIEnergy
 {
@@ -49,6 +50,17 @@ namespace JOIEnergy
             };
 
             services.AddMvc();
+
+            services.AddSwaggerGen(opt =>
+            {
+                opt.SwaggerDoc("1",new OpenApiInfo());
+                opt.IncludeXmlComments("JOIEnergy.xml");
+            });
+            services.AddSwaggerGen(opt =>
+            {
+                opt.SwaggerDoc("2", new OpenApiInfo());
+                opt.IncludeXmlComments("JOIEnergy.xml");
+            });
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IMeterReadingService, MeterReadingService>();
             services.AddTransient<IPricePlanService, PricePlanService>();
@@ -66,6 +78,18 @@ namespace JOIEnergy
             }
 
             app.UseMvc();
+
+            app.UseSwagger(opt =>
+            {
+                opt.RouteTemplate= "swagger/{documentName}/swagger.json";
+            });
+
+            app.UseSwaggerUI(opt =>
+            {
+                opt.SwaggerEndpoint("1/swagger.json", "1");
+                opt.SwaggerEndpoint("2/swagger.json", "2");
+                opt.RoutePrefix = "swagger";
+            });
         }
 
         private Dictionary<string, List<ElectricityReading>> GenerateMeterElectricityReadings() {
