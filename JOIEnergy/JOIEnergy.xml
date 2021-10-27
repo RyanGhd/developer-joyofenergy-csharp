@@ -4,5 +4,16 @@
         <name>JOIEnergy</name>
     </assembly>
     <members>
+        <member name="T:JOIEnergy.Controllers.MeterReadingController">
+            <summary>
+            Manages meter data
+            </summary>
+        </member>
+        <member name="M:JOIEnergy.Controllers.MeterReadingController.#ctor(JOIEnergy.Services.IMeterReadingService)">
+            <summary>
+            Manages meter data
+            </summary>
+            <param name="meterReadingService"></param>
+        </member>
     </members>
 </doc>

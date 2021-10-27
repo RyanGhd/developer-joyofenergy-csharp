@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 namespace JOIEnergy.Controllers
 {
     [Route("price-plans")]
-    public class PricePlanComparatorController : Controller
+    public class PricePlanComparatorController : ControllerBase
     {
         private readonly IPricePlanService _pricePlanService;
         private readonly IAccountService _accountService;

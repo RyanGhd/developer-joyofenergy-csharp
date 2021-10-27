@@ -73,7 +73,9 @@ namespace JOIEnergy
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseEndpoints(config => { config.MapControllers(); });
 
             app.UseSwagger(opt=> { });
             app.UseSwaggerUI(opt => { });
