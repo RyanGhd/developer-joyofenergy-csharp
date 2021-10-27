@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JOIEnergy.Controllers
 {
     [Route("readings")]
-    public class MeterReadingController : Controller
+    public class MeterReadingController : ControllerBase
     {
         private readonly IMeterReadingService _meterReadingService;
 
