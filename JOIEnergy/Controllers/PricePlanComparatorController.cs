@@ -21,7 +21,7 @@ namespace JOIEnergy.Controllers
         }
 
         [HttpGet("compare-all/{smartMeterId}")]
-        public ObjectResult CalculatedCostForEachPricePlan(string smartMeterId)
+        public IActionResult CalculatedCostForEachPricePlan(string smartMeterId)
         {
             var pricePlanId = _accountService.GetPricePlanIdForSmartMeterId(smartMeterId);
             var costPerPricePlan = _pricePlanService.GetConsumptionCostOfElectricityReadingsForEachPricePlan(smartMeterId);
@@ -34,8 +34,8 @@ namespace JOIEnergy.Controllers
 
             return
                 costPerPricePlan.Any() ? 
-                new ObjectResult(response) : 
-                new NotFoundObjectResult(string.Format("Smart Meter ID ({0}) not found", smartMeterId));
+                new OkObjectResult(response) : 
+                new NotFoundObjectResult(string.Format("Smart Meter ID ({0}) not found", smartMeterId)) as IActionResult;
         }
 
         [HttpGet("recommend/{smartMeterId}")]

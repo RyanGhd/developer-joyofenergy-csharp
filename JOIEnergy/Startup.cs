@@ -49,7 +49,7 @@ namespace JOIEnergy
                 }
             };
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddSwaggerGen(config =>
             {

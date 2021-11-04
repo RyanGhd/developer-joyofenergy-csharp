@@ -4,7 +4,7 @@ using JOIEnergy.Enums;
 using JOIEnergy.Services;
 using Xunit;
 
-namespace JOIEnergy.Tests
+namespace JOIEnergy.Tests.Services
 {
     public class AccountServiceTest
     {

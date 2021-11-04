@@ -4,7 +4,7 @@ using JOIEnergy.Domain;
 using JOIEnergy.Enums;
 using Xunit;
 
-namespace JOIEnergy.Tests
+namespace JOIEnergy.Tests.Domain
 {
     public class PricePlanTest
     {
