@@ -49,11 +49,13 @@ namespace JOIEnergy
                 }
             };
 
-            services.AddMvc();
+            services.AddControllers(opt => { });
+
+            //services.AddMvc();
 
             services.AddSwaggerGen(opt =>
             {
-                opt.SwaggerDoc("v1",new OpenApiInfo());
+                opt.SwaggerDoc("v1", new OpenApiInfo());
             });
 
             services.AddTransient<IAccountService, AccountService>();
@@ -72,13 +74,20 @@ namespace JOIEnergy
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseEndpoints(opt =>
+            {
+                opt.MapControllers();
+            });
+
 
             app.UseSwagger(opt => { });
             app.UseSwaggerUI(opt => { });
         }
 
-        private Dictionary<string, List<ElectricityReading>> GenerateMeterElectricityReadings() {
+        private Dictionary<string, List<ElectricityReading>> GenerateMeterElectricityReadings()
+        {
             var readings = new Dictionary<string, List<ElectricityReading>>();
             var generator = new ElectricityReadingGenerator();
             var smartMeterIds = SmartMeterToPricePlanAccounts.Select(mtpp => mtpp.Key);
