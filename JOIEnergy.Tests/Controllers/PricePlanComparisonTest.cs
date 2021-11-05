@@ -176,6 +176,11 @@ namespace JOIEnergy.Tests.Controllers
         [Fact]
         public void GivenNoMatchingMeterIdShouldReturnNotFound()
         {
+            var fixture = new PricePlanComparisonTestFixture();
+            fixture.PricePlanService
+                .Setup(m => m.GetConsumptionCostOfElectricityReadingsForEachPricePlan(It.IsAny<string>()))
+                .Returns(new Dictionary<string, decimal>());
+
             Assert.Equal(404, ((ObjectResult)controller.CalculatedCostForEachPricePlan("not-found")).StatusCode);
         }
 
